@@ -1,17 +1,17 @@
-// api/fetchQuizData.js
-
-export default async function handler(req, res) {
-    const response = await fetch('https://practical.mytdigital.tech/', {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-
-    if (!response.ok) {
-        res.status(response.status).json({ message: 'Error fetching quiz data' });
-        return;
+const fetchQuizData = async () => {
+    try {
+      const { ipcRenderer } = window.require('electron');
+  
+      const data = await ipcRenderer.invoke('fetch-quiz-data');
+      console.log('Fetched data:', data);
+  
+      // Shuffle questions once and set them in state
+      const shuffledQuestions = shuffleArray(data.DATA.questions);
+      setQuestions(shuffledQuestions);
+      setTotalQuestions(shuffledQuestions.length);
+    } catch (error) {
+      console.error('Error fetching quiz data:', error);
+      alert('There was an error fetching quiz data. Please try again later.');
     }
+  };
 
-    const data = await response.json();
-    res.status(200).json(data);
-}

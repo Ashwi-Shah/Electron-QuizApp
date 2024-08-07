@@ -140,9 +140,9 @@ const Login = ({ setUserEmail }) => {
         console.log('Captcha value:', value);
     };
 
-    const isValidEmail = (email) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    };
+    // const isValidEmail = (email) => {
+    //     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // };
 
     return (
         <div className="grid justify-items-center mt-40">
